@@ -185,7 +185,6 @@ const App = () => {
     <>
       <Navbar />
       <main className="w-[1280px] mx-auto flex flex-col items-center">
-        {/* <h1>Welcome to InstaVM</h1> */}
         <h1 className="w-[70%] text-center my-24 font-medium">
           Launch secure, temporary cloud desktops and browsers anytime,
           anywhere.
