@@ -12,10 +12,10 @@
   "dependencies": {
     "@aws-sdk/client-ec2": "^3.620.0",
     "@aws-sdk/client-ssm": "^3.620.0",
+    "@radix-ui/react-dropdown-menu": "^2.1.1",
     "@radix-ui/react-select": "^2.1.1",
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
-    "@radix-ui/react-tabs": "^1.1.0",
     "buffer": "^6.0.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
