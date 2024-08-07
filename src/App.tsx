@@ -35,6 +35,7 @@ import {
   LoaderCircle,
   Rocket,
   Skull,
+  TriangleAlert,
 } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "./components/ui/alert";
 import Navbar from "./components/Navbar";
@@ -87,6 +88,7 @@ const App = () => {
     }
 
     setLoading(true);
+    setMessage("Terminating instance...");
     try {
       await terminateInstance(id);
       setId("");
@@ -165,8 +167,11 @@ const App = () => {
         app!,
         password!
       );
-      if (instanceId === null) {
+      if (instanceId === "" || publicIpAddress === null) {
         setMessage("Maximum number exceeded, please try again later");
+        setLoading(false);
+        setStartPolling(false);
+        setContainerReady(false);
         return;
       }
       setId(instanceId);
@@ -182,15 +187,21 @@ const App = () => {
   };
 
   return (
-    <>
+    <div className="my-0 mx-auto">
       <Navbar />
-      <main className="w-[1280px] mx-auto flex flex-col items-center">
-        <h1 className="w-[70%] text-center my-24 font-medium">
+      <section className="relative mx-auto flex flex-col items-center">
+        <img
+          src="hero_bg.jpg"
+          alt="VaporDesk Hero background Image"
+          className="absolute dark:opacity-50"
+        />
+        <h1 className="relative w-[70%] text-white text-center my-24 font-medium">
           Launch secure, temporary cloud desktops and browsers anytime,
           anywhere.
         </h1>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background"></div>
         <Header />
-      </main>
+      </section>
 
       <form
         onSubmit={handleLaunchInstance}
@@ -216,8 +227,12 @@ const App = () => {
                   </SelectTrigger>
                   <SelectContent className="" id="instance-selection">
                     <SelectItem value="t2.micro">t2.micro</SelectItem>
-                    <SelectItem value="t2.small">t2.small</SelectItem>
-                    <SelectItem value="t2.large">t2.large</SelectItem>
+                    <SelectItem value="t2.small" disabled>
+                      t2.small
+                    </SelectItem>
+                    <SelectItem value="t2.large" disabled>
+                      t2.large
+                    </SelectItem>
                   </SelectContent>
                 </Select>
               </label>
@@ -310,10 +325,14 @@ const App = () => {
                 {message.includes("terminated") && (
                   <CircleStop height={20} color="red" />
                 )}
+                {message.includes("Maximum") && (
+                  <TriangleAlert height={20} color="yellow" />
+                )}
                 <AlertTitle className="mb-4">{message}</AlertTitle>
                 <AlertDescription>
                   {containerReady && (
-                    <div className="flex gap-3">
+                    <div className="flex gap-3 items-center">
+                      <p className="text-sm">Username: kasm_user</p>
                       <Button
                         type="button"
                         className="w-48 text-lg"
@@ -354,7 +373,7 @@ const App = () => {
       </form>
 
       {/* {message && <p>{message}</p>} */}
-    </>
+    </div>
   );
 };
 
