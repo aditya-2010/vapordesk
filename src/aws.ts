@@ -13,11 +13,12 @@ import {
   SSMClient,
 } from "@aws-sdk/client-ssm";
 import { Buffer } from "buffer";
+import { awsRegion } from "./lib/data";
 
 const MAX_INSTANCES = 2;
 
 const client = new EC2Client({
-  region: "ap-south-1",
+  region: awsRegion,
   credentials: {
     accessKeyId: import.meta.env.VITE_APP_AWS_ACCESS_KEY_ID,
     secretAccessKey: import.meta.env.VITE_APP_AWS_SECRET_ACCESS_KEY,
@@ -25,7 +26,7 @@ const client = new EC2Client({
 });
 
 const ssmClient = new SSMClient({
-  region: "ap-south-1",
+  region: awsRegion,
   credentials: {
     accessKeyId: import.meta.env.VITE_APP_AWS_ACCESS_KEY_ID,
     secretAccessKey: import.meta.env.VITE_APP_AWS_SECRET_ACCESS_KEY,
@@ -113,7 +114,7 @@ export const launchEC2Instance = async (
       {
         DeviceName: "/dev/xvda",
         Ebs: {
-          VolumeSize: 20,
+          VolumeSize: 15,
         },
       },
     ],

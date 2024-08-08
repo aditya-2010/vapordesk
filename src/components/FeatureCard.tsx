@@ -1,6 +1,6 @@
 import { Separator } from "./ui/separator";
 
-function Header() {
+function FeatureCard() {
   return (
     <div className="relative bg-white/70 dark:bg-black/70 rounded-md p-6 w-[900px] my-5">
       <section className="flex justify-center items-center gap-12 m-14">
@@ -37,4 +37,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default FeatureCard;
