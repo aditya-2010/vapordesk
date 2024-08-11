@@ -202,7 +202,15 @@ function LaunchForm() {
                 </SelectTrigger>
                 <SelectContent className="">
                   {ec2Instances.map((instanceType) => (
-                    <SelectItem key={instanceType} value={instanceType}>
+                    <SelectItem
+                      key={instanceType}
+                      value={instanceType}
+                      // TODO: change later
+                      disabled={
+                        instanceType === "t2.small" ||
+                        instanceType === "t2.large"
+                      }
+                    >
                       {instanceType}
                     </SelectItem>
                   ))}
